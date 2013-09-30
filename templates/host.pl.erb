@@ -1,0 +1,16 @@
+$Conf{XferMethod} = '<%= @backup_method %>';
+$Conf{ClientNameAlias} = '<%= @nodeConfiguration['local_network_prefix'] %><%= @ip %>';
+
+$Conf{BackupFilesOnly} = {
+<% @backup_data.each do |key, value| %>
+	'<%= key %>' => [ <% value.each do |data| %>
+		'<%= data %>', 	<% end %>
+	], <% end %>
+};
+
+<% if @template_data['key_user'] %>$Conf{<%= @template_data['key_user'] %>} = '<%= @template_data['user'] %>';<% end %>
+<% if @template_data['key_password'] %>$Conf{<%= @template_data['key_password'] %>} = '<%= @template_data['password'] %>';<% end %>
+$Conf{<%= @template_data['key_shares'] %>} = [ <% @backup_data.each do |key,value| %> '<%= key %>', <% end %> ];
+
+<% if @template_data['extra_keys'] %><% @template_data['extra_keys'].each do |key, value| %>$Conf{<%= key %>} = '<%= value %>';
+<% end %><% end %>

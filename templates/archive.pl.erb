@@ -1,0 +1,9 @@
+$Conf{ArchiveClientCmd} = '$Installdir/bin/Alkivi_archiveHost $tarCreatePath $splitpath $parpath $host $backupnumber $compression $compext $splitsize $archiveloc /mnt/hubic $parfile *';
+$Conf{ArchiveComp} = 'gzip';
+$Conf{ArchiveDest} = '/home/backuppc/archive';
+$Conf{ArchivePar} = '0';
+$Conf{XferMethod} = 'archive';
+$Conf{EMailAdminUserName} = '<%= @email_to %>';
+$Conf{EMailFromUserName} = '<%= @email_from %>';
+$Conf{EMailUserDestDomain} = '<%= @email_to %>';
+$Conf{ArchiveSplit} = '2000';
