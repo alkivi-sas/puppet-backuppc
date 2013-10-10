@@ -31,11 +31,12 @@ Please consult the BackupPC documentation for explanations on configuration opti
 
 ```puppet
 class { 'backuppc::host':
-    backup        => true,
-    ip            => '192.168.10.1',
-    os            => 'osx',
-    backup_method => 'rsync',
-    backup_data   => { '/' => ['Users'] },
+    backup            => true,
+    ip                => '192.168.10.1',
+    os                => 'osx',
+    backup_method     => 'rsync',
+    backup_data       => { '/' => ['Users'] },
+    blackout_periods' => [ { 'hourBegin' => '7.0', 'hourEnd' => '19.5', 'weekDays' => [ 1, 2, 3, 4, 5] } ],
 }
 ```
 

@@ -14,3 +14,15 @@ $Conf{<%= @template_data['key_shares'] %>} = [ <% @backup_data.each do |key,valu
 
 <% if @template_data['extra_keys'] %><% @template_data['extra_keys'].each do |key, value| %>$Conf{<%= key %>} = '<%= value %>';
 <% end %><% end %>
+
+<% if @blackout_periods.size > 0 %>
+ $Conf{BlackoutPeriods} = [
+ <% @blackout_periods.each do |period| %>
+     {
+        hourBegin => <%= period['hourBegin'] %>,
+        hourEnd   => <%= period['hourEnd'] %>,
+        weekDays  => [ <%= period['weekDays'].join(', ') %>],
+    },
+  <% end %>
+ ];
+<% end %>
