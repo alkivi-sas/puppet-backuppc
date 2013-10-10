@@ -4,9 +4,17 @@ define backuppc::host (
   $comment,
   $os,
   $backup,
-  $backup_method    = 'rsyncd',
-  $backup_data      = {},
-  $blackout_periods = [],
+  $backup_method      = 'rsyncd',
+  $backup_data        = {},
+  $blackout_periods   = [],
+  $dumpPreUserCmd     = undef,
+  $dumpPostUserCmd    = undef,
+  $dumpPreShareCmd    = undef,
+  $dumpPostShareCmd   = undef,
+  $restorePreUserCmd  = undef,
+  $restorePostUserCmd = undef,
+  $archivePreUserCmd  = undef,
+  $archivePostUserCmd = undef,
 ) {
 
   validate_bool($backup)

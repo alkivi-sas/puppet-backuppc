@@ -26,3 +26,29 @@ $Conf{<%= @template_data['key_shares'] %>} = [ <% @backup_data.each do |key,valu
   <% end %>
  ];
 <% end %>
+
+<% if @dumpPreUserCmd %>
+$Conf{DumpPreUserCmd} = '<%= @dumpPreUserCmd %>'
+<% end %>
+<% if @dumpPostUserCmd %>
+$Conf{DumpPostUserCmd} = '<%= @dumpPostUserCmd %>'
+<% end %>
+<% if @dumpPreShareCmd %>
+$Conf{DumpPreShareCmd} = '<%= @dumpPreShareCmd %>'
+<% end %>
+<% if @dumpPostShareCmd %>
+$Conf{DumpPostShareCmd} = '<%= @dumpPostShareCmd %>'
+<% end %>
+<% if @restorePreUserCmd %>
+$Conf{RestorePreUserCmd} = '<%= @restorePreUserCmd %>'
+<% end %>
+<% if @restorePostUserCmd %>
+$Conf{RestorePostUserCmd} = '<%= @restorePostUserCmd %>'
+<% end %>
+<% if @archivePreUserCmd %>
+$Conf{ArchivePreUserCmd} = '<%= @archivePreUserCmd %>'
+<% end %>
+<% if @archivePostUserCmd %>
+$Conf{ArchivePostUserCmd} = '<%= @archivePostUserCmd %>'
+<% end %>
+
