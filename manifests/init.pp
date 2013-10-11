@@ -75,18 +75,18 @@ class backuppc (
   if($apache_vhost)
   {
     apache::vhost { 'backuppc':
-      priority        => '001',
-      servername      => "backup.${domain_name}",
-      port            => '443',
-      ssl             => true,
-      ssl_cert        => '/home/alkivi/www/ssl/alkivi.crt',
-      ssl_key         => '/home/alkivi/www/ssl/alkivi.key',
-      docroot         => '/usr/share/backuppc/cgi-bin',
-      logroot         => '/home/alkivi/www/log',
-      access_log      => false,
-      override        => ['All'],
-      error_log_file  => 'apache_error.log',
-      custom_fragment => '
+      priority         => '001',
+      servername       => "backup.${domain_name}",
+      port             => '443',
+      ssl              => true,
+      ssl_cert         => '/home/alkivi/www/ssl/alkivi.crt',
+      ssl_key          => '/home/alkivi/www/ssl/alkivi.key',
+      docroot          => '/usr/share/backuppc/cgi-bin',
+      logroot          => '/home/alkivi/www/log',
+      access_log       => false,
+      override         => ['All'],
+      error_log_syslog => 'syslog',
+      custom_fragment  => '
       CustomLog /home/alkivi/www/log/apache_access.log combined
       Alias /backuppc /usr/share/backuppc/cgi-bin/
       ',
