@@ -56,7 +56,7 @@ define backuppc::host (
           'key_user'     => 'SmbShareUserName',
           'key_password' => 'SmbSharePasswd',
           'user'         => 'alkivi',
-          'password'     => 'CHANGEME',
+          'password'     => alkivi_password($title, 'hosts'),
         }
       }
       elsif($backup_method == 'rsyncd')
@@ -66,7 +66,7 @@ define backuppc::host (
           'key_user'     => 'RsyncdUserName',
           'key_password' => 'RsyncdPasswd',
           'user'         => 'alkivi',
-          'password'     => 'CHANGEME',
+          'password'     => alkivi_password($title, 'hosts'),
         }
       }
       else
@@ -77,28 +77,17 @@ define backuppc::host (
       # Generate a password
       alkivi_base::passwd { $title:
         type   => 'hosts',
-        before => File["/etc/backuppc/${title}.pl.temp"],
       }
 
       # Todo : create something for alkibox puppet master to be able to generate windows user on the fly :)
 
       # Generate generic conf
-      file { "/etc/backuppc/${title}.pl.temp":
+      file { "/etc/backuppc/${title}.pl":
         ensure  => present,
         owner   => 'backuppc',
         group   => 'www-data',
         mode    => '0640',
         content => template('backuppc/host.pl.erb'),
-      }
-
-      # Fix password
-      exec { "/etc/backuppc/${title}.password":
-        command  => "PASSWORD=`cat /root/.passwd/hosts/${title}` && sed 's/CHANGEME/'\$PASSWORD'/' /etc/backuppc/${title}.pl.temp > /etc/backuppc/${title}.pl",
-        provider => 'shell',
-        creates  => "/etc/backuppc/${title}.pl",
-        path     => ['/bin', '/sbin', '/usr/bin', '/root/alkivi-scripts/'],
-        require  => File["/etc/backuppc/${title}.pl.temp"],
-        notify   => Class['backuppc::service'],
       }
     }
     elsif($os == 'osx')
