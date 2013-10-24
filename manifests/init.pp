@@ -1,5 +1,4 @@
 class backuppc (
-  $htpasswd             = '/home/alkivi/.htpasswd',
   $htaccess             = '/usr/share/backuppc/cgi-bin/.htaccess',
   $wakeup_schedule      = [2,4,6,12,18,20,22],
   $max_backups          = 2,
@@ -20,11 +19,8 @@ class backuppc (
   $email_to             = 'backup+customer@alkivi.fr',
   $cgi_admin_user_group = 'admin',
   $cgi_admin_users      = ['martin', 'bayou'],
-  $remote_backup        = false,
   $motd                 = true,
-  $apache_vhost         = true,
   $domain_name,
-
 ) {
 
   if($motd)
@@ -32,7 +28,6 @@ class backuppc (
     motd::register{ 'BackupPC Server': }
   }
 
-  validate_string($htpasswd)
   validate_string($domain_name)
 
   validate_array($wakeup_schedule)
@@ -71,48 +66,6 @@ class backuppc (
   Class['backuppc::config'] ->
   Class['backuppc::service']
 
-  # Apache config
-  if($apache_vhost)
-  {
-    apache::vhost { 'backuppc':
-      priority         => '001',
-      servername       => "backup.${domain_name}",
-      port             => '443',
-      ssl              => true,
-      ssl_cert         => '/home/alkivi/www/ssl/alkivi.crt',
-      ssl_key          => '/home/alkivi/www/ssl/alkivi.key',
-      docroot          => '/usr/share/backuppc/cgi-bin',
-      logroot          => '/home/alkivi/www/log',
-      access_log       => false,
-      override         => ['All'],
-      error_log_syslog => 'syslog',
-      custom_fragment  => '
-      CustomLog /home/alkivi/www/log/apache_access.log combined
-      Alias /backuppc /usr/share/backuppc/cgi-bin/
-      ',
-      directories     => [
-        {
-          path           => '/usr/share/backuppc/cgi-bin',
-          options        => 'ExecCGI FollowSymlinks',
-          allow_override => ['Limit','AuthConfig'],
-          order          => ['allow','deny'],
-          addhandlers    => [
-            {
-              handler    => 'cgi-script',
-              extensions => ['.cgi'],
-            }
-          ],
-        },
-      ],
-    }
-  }
 
-  if($remote_backup)
-  {
-    class { 'backuppc::archive':
-      from_email  => $email_from,
-      admin_email => $email_to,
-    }
-  }
 
 }

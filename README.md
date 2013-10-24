@@ -10,15 +10,15 @@ uses exported resources to create the client's configuration file
 ```puppet
 class { 'backuppc': }
 ```
-This will do the typical install, configure and service management. The module manage apache by default. 
+This will do the typical install, configure and service management. The module manage does NOT manage apache by default 
 service that something has changed. Alternatively you can install backuppc as a virtual host or whatever else suits your needs.
 
-Alkivi htpasswd and htaccess will be put in place, need to make this more generic
+An htaccess will be put in place, update it according to your needs
 
 ### More server configuration
 
 ```puppet
-class { 'backuppc::server':
+class { 'backuppc':
   wakeup_schedule   => [1, 2, 3, 4, 5, 21, 22, 23],
   max_backups       => 3,
   max_user_backups  => 1,
@@ -31,7 +31,6 @@ Please consult the BackupPC documentation for explanations on configuration opti
 
 ```puppet
 class { 'backuppc::host':
-    backup             => true,
     ip                 => '192.168.10.1',
     os                 => 'osx',
     backup_method      => 'rsync',
@@ -45,13 +44,9 @@ class { 'backuppc::host':
     restorePostUserCmd => undef,
     archivePreUserCmd  => undef,
     archivePostUserCmd => undef,
+    remote_user        => 'root',
 }
 ```
-
-backup boolean is necessary, because our host configuration is global (dhcp dns) and working with each loop was not possible at the time
-ip, os and backup_method generate the host.pl according to the configuration
-When using windows, a password is generated using alkivi_base class
-
 
 ## Limitations
 

@@ -1,4 +1,4 @@
-AuthUserFile <%= @htpasswd %>
+AuthUserFile /home/alkivi/.htpasswd
 AuthGroupFile /dev/null
 AuthType Basic
 Authname "Alkivi Admin Only"
