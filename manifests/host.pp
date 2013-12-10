@@ -72,8 +72,9 @@ define backuppc::host (
     }
 
     # Generate a password
-    alkivi_base::passwd { $title:
-      type   => 'hosts',
+    alkivi_base::passwd { "backuppc-${title}":
+      file => $title,
+      type => 'hosts',
     }
 
     # Todo : create something for alkibox puppet master to be able to generate windows user on the fly :)
