@@ -1,3 +1,6 @@
+2013-12-11
+* added more customization for backuppc host
+
 2013-12-10
 * customize passwd to avoid conflict
 

@@ -3,7 +3,8 @@ define backuppc::host (
   $os,
   $backup_method      = 'rsyncd',
   $backup_data        = {},
-  $blackout_periods   = [],
+  $blackoutPeriods    = undef,
+  $wakeupSchedule     = undef,
   $dumpPreUserCmd     = undef,
   $dumpPostUserCmd    = undef,
   $dumpPreShareCmd    = undef,
@@ -21,6 +22,16 @@ define backuppc::host (
   validate_string($backup_method)
   validate_hash($backup_data)
   validate_string($remote_user)
+
+  if($blackoutPeriods)
+  {
+    validate_array($blackoutPeriods)
+  }
+
+  if($wakeupSchedule)
+  {
+    validate_array($wakeupSchedule)
+  }
 
   if(!is_ip_address($ip))
   {

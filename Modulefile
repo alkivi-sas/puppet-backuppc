@@ -1,5 +1,5 @@
 name    'alkivi-backuppc'
-version '0.1.1'
+version '0.1.2'
 source 'https://github.com/alkivi-sas/puppet-backuppc'
 author 'alkivi'
 license 'LGPLv3'
