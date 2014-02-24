@@ -27,10 +27,6 @@ $Conf{<%= @template_data['key_shares'] %>} = [ <% @backup_data.each do |key,valu
  ];
 <% end %>
 
-<% if @wakeupSchedule %>
-$Conf{WakeupSchedule} = [ <%= @wakeupSchedule.join(', ') %> ];
-<% end %>
-
 
 <% if @dumpPreUserCmd %>
 $Conf{DumpPreUserCmd} = '<%= @dumpPreUserCmd %>'

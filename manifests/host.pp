@@ -4,7 +4,6 @@ define backuppc::host (
   $backup_method      = 'rsyncd',
   $backup_data        = {},
   $blackoutPeriods    = undef,
-  $wakeupSchedule     = undef,
   $dumpPreUserCmd     = undef,
   $dumpPostUserCmd    = undef,
   $dumpPreShareCmd    = undef,
@@ -26,11 +25,6 @@ define backuppc::host (
   if($blackoutPeriods)
   {
     validate_array($blackoutPeriods)
-  }
-
-  if($wakeupSchedule)
-  {
-    validate_array($wakeupSchedule)
   }
 
   if(!is_ip_address($ip))
