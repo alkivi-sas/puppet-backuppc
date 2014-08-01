@@ -31,20 +31,49 @@ class backuppc (
   validate_string($domain_name)
 
   validate_array($wakeup_schedule)
-  validate_string($max_backups)
-  validate_string($max_user_backups)
-  validate_string($max_nightly_jobs)
-  validate_string($max_old_log_days)
+  if(! is_integer($max_backups))
+  {
+      fail('max_backups should be an integer')
+  }
+  if(! is_integer($max_user_backups))
+  {
+      fail('max_user_backups should be an integer')
+  }
+  if(! is_integer($max_nightly_jobs))
+  {
+      fail('max_nightly_jobs should be an integer')
+  }
+  if(! is_integer($max_old_log_days))
+  {
+      fail('max_old_log_days should be an integer')
+  }
 
   validate_string($full_period)
   validate_array($full_keep_cnt)
-  validate_string($full_keep_cnt_min)
-  validate_string($full_age_max)
+  if(! is_integer($full_keep_cnt_min))
+  {
+      fail('full_keep_cnt_min should be an integer')
+  }
+  if(! is_integer($full_age_max))
+  {
+      fail('full_age_max should be an integer')
+  }
 
   validate_string($incr_period)
-  validate_string($incr_keep_cnt)
-  validate_string($incr_keep_cnt_min)
-  validate_string($incr_age_max)
+
+  if(! is_integer($incr_keep_cnt))
+  {
+      fail('incr_keep_cnt should be an integer')
+  }
+  if(! is_integer($incr_keep_cnt_min))
+  {
+      fail('incr_keep_cnt_min should be an integer')
+  }
+  if(! is_integer($incr_age_max))
+  {
+      fail('incr_age_max should be an integer')
+  }
+
   validate_array($incr_levels)
 
   validate_string($email_min_days)

@@ -1,5 +1,5 @@
 $Conf{XferMethod} = '<%= @backup_method %>';
-$Conf{ClientNameAlias} = '<%= @nodeConfiguration['local_network_prefix'] %><%= @ip %>';
+$Conf{ClientNameAlias} = '<%= @ip %>';
 
 $Conf{BackupFilesOnly} = {
 <% @backup_data.each do |key, value| %>
