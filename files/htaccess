@@ -1,7 +1,0 @@
-AuthUserFile /home/alkivi/.htpasswd
-AuthGroupFile /dev/null
-AuthType Basic
-Authname "Alkivi Admin Only"
-AuthBasicProvider "ldap"
-AuthLDAPURL "ldaps://ldap.alkivi.fr ldap2.alkivi.fr/ou=people,dc=alkivi,dc=fr?uid??(gidNumber=500)"
-require valid-user   

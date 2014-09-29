@@ -49,12 +49,4 @@ class backuppc::config (
   file { '/etc/backuppc/localhost.pl':
     ensure => absent,
   }
-
-  file { $backuppc::htaccess:
-    ensure  => present,
-    owner   => 'alkivi',
-    group   => 'alkivi',
-    mode    => '0644',
-    source => 'puppet:///modules/backuppc/htaccess',
-  }
 }
