@@ -18,7 +18,7 @@ class backuppc (
   $email_from           = 'backup@alkivi.fr',
   $email_to             = 'backup+customer@alkivi.fr',
   $cgi_admin_user_group = 'admin',
-  $cgi_admin_users      = ['martin', 'bayou'],
+  $cgi_admin_users      = ['*'],
   $motd                 = true,
   $domain_name,
 ) {
