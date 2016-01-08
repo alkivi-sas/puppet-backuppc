@@ -120,8 +120,8 @@ define backuppc::host (
       $template_data = {
         'key_shares' => 'RsyncShareName',
         'extra_keys' => {
-          'RsyncClientCmd'        => '$sshPath -q -x -l alkivi $host nice -n 19 /usr/bin/sudo $rsyncPath $argList+',
-          'RsyncClientRestoreCmd' => '$sshPath -q -x -l alkivi $host nice -n 19 /usr/bin/sudo $rsyncPath $argList+',
+          'RsyncClientCmd'        => '$sshPath -q -x -l ${remote_user} $host nice -n 19 /usr/bin/sudo $rsyncPath $argList+',
+          'RsyncClientRestoreCmd' => '$sshPath -q -x -l ${remote_user} $host nice -n 19 /usr/bin/sudo $rsyncPath $argList+',
         }
       }
     }
